@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: wordseek-bot
+    env: node
+    region: singapore
+
+    buildCommand: |
+      curl -fsSL https://bun.sh/install | bash
+      ~/.bun/bin/bun install
+
+    startCommand: ~/.bun/bin/bun run src/index.ts
+
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: PORT
+        value: 10000
