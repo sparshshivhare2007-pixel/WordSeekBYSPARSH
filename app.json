@@ -1,0 +1,26 @@
+{
+  "name": "WordSeek",
+  "description": "A word guessing game deployed on Heroku.",
+  "repository": "https://github.com/sparshshivhare2007-pixel/WordSeekBYSPARSH",
+  "logo": "",
+  "keywords": [
+    "node",
+    "express",
+    "game",
+    "wordseek"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Set to production",
+      "value": "production"
+    }
+  },
+  "scripts": {
+    "postdeploy": "echo 'Deployment complete!'"
+  }
+}
