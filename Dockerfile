@@ -1,18 +1,18 @@
-FROM oven/bun:1 as base
+FROM oven/bun:1
 
 WORKDIR /app
 
 # Copy all files
 COPY . .
 
-# Install ALL deps including devDependencies
-RUN bun install --production=false
+# Install all dependencies (dev + prod)
+RUN bun install
 
-# Install React without modifying package.json
+# Install React runtime (required for .tsx)
 RUN bun add react @types/react --dev
 
-# Expose (if needed)
-EXPOSE 3000
+# Run database migrations automatically
+RUN bun run db:migrate latest || true
 
-# Run bot
-CMD ["bun", "run", "src/index.ts"]
+# Start the bot
+CMD ["bun", "run", "start"]
