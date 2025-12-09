@@ -1,19 +1,17 @@
-# Bun official image
-FROM oven/bun:1
+FROM oven/bun:1 as base
 
-# Create app directory
 WORKDIR /app
 
-# Copy package files first (cache optimization)
-COPY package.json bun.lockb ./
-
-# Install dependencies
-RUN bun install --production
-
-# Copy all project files
+# Copy all files
 COPY . .
 
-# Expose (not required for bot, but safe)
+# Install ALL deps including devDependencies
+RUN bun install --production=false
+
+# Install React without modifying package.json
+RUN bun add react @types/react --dev
+
+# Expose (if needed)
 EXPOSE 3000
 
 # Run bot
